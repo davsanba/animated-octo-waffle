@@ -103,23 +103,23 @@ public class PointsEx extends JFrame{
 
     public void calcBezier(){
     	
-    	CandidateFactory<int[]> factory = new NumbreFactory(250, -250);
-        char[] chars = new char[27];
+    	CandidateFactory<int[]> factory = new NumbreFactory(2000, -2000);
+    	NumberGenerator numGen = new NumberGenerator();
+    	/* char[] chars = new char[27];
         for (char c = 'A'; c <= 'Z'; c++)
         {
             chars[c - 'A'] = c;
         }
         chars[26] = ' ';
+        */
         //Factory for random 11-char Strings
-        CandidateFactory<String> agsdg = new StringFactory(chars, 11);
+        //CandidateFactory<String> agsdg = new StringFactory(chars, 11);
         //extend AbstractCandidateFactory 
         
-        List<EvolutionaryOperator<int[]>> operators = new LinkedList<EvolutionaryOperator<int[]> >();
-        
-        operators.add(new IntArrayCrossover());
         //operators.add(new StringMutation(chars, new Probability(0.02)));
         
-        EvolutionaryOperator<int[]> pipeline = new EvolutionPipeline<>(operators);
+    	
+        EvolutionaryOperator<int[]> pipeline = new IntMutation();
         
         
         EvolutionEngine<int[]> engine = new GenerationalEvolutionEngine<>(
@@ -133,14 +133,15 @@ public class PointsEx extends JFrame{
         //
         
         //ElapsedTime
-        int[] result = engine.evolve(100, 3, new TargetFitness(100, false));
+        //int[] result = engine.evolve(100, 3, new TargetFitness(1000, false));
         //Stagnation 
-        //int[] result = engine.evolve(10, 2, new GenerationCount(1000));
+        int[] result = engine.evolve(100, 4, new GenerationCount(1000000));
 		for(int i = 0; i<6;i++){
 			System.out.println("Resultado -->"+result[i]);
 		}
-        surface.drawBezier(result[0],result[1],result[2],result[3],result[4],result[5]);
-        holder.repaint();
+		
+		surface.drawBezier(result[0],result[1],result[2],result[3],result[4],result[5]);
+		holder.repaint();
     }
     public void addPoint(MouseEvent e){
         surface.setNextPoint(new Point(e.getX(), e.getY() ));

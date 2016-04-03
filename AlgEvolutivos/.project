@@ -24,11 +24,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>watchmaker-framework-0.7.1</name>
-			<type>2</type>
-			<location>C:/Users/David/watchmaker-framework-0.7.1</location>
-		</link>
-	</linkedResources>
 </projectDescription>

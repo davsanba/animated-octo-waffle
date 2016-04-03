@@ -34,8 +34,10 @@ public class CoeficienteEvaluator implements FitnessEvaluator<int[]> {
 		dcy = Math.pow(candidate[5]-cy,2);
 		
 		//System.out.println(dax + ", " + day + ", " + dbx + ", " + dby + ", " + dcx + ", " + dcy);
-		
-		return dax+day+dbx+dby+dcx+dcy;
+		double fitness = dax + day + dbx + dby + dcx + dcy;
+		//System.out.println(candidate[0] + " " + candidate[1] + " " + candidate[2] + " " + " " + candidate[3] + " " + candidate[4] + " " + candidate[5] );
+		//System.out.println(fitness);
+		return fitness;
 	}
 
 }
