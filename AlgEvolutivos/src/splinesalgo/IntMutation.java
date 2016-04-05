@@ -19,35 +19,29 @@ public class IntMutation implements EvolutionaryOperator<int[]> {
 
 	private int[] mutateList(int[] i, Random rng) {
 		for(int j = 0; j < 6; j++){
-			int aux = i[j];
-			int num = rng.nextInt(100);
-			int operador = rng.nextInt(2);
-			switch (operador) {
-			case 0:
-				aux = aux + num;
-				break;
-			case 1:
-				aux = aux - num;
-				break;
-			case 2:
-				aux = aux * num;
-				break;
-			case 3:
-				if(num != 0)
-					aux = aux / num;
-				else
-					aux = aux - num;
-				break;
-			default:
-				break;
+			String bin = Integer.toBinaryString(Math.abs(i[j]));
+			double prob = 1.0/bin.length();
+			double random = rng.nextDouble();
+			if(random <= prob){
+				System.out.println("FUNCIONA!!!");
+				System.out.println("antes: " + bin );
+				int pos = rng.nextInt(bin.length());
+				System.out.println("posicion: " + pos);
+				String[] ary = bin.split("");
+				if(ary[pos].equals("1")){
+					ary[pos] = "0";
+				}else{
+					System.out.println(ary[pos]);
+					ary[pos] = "1";
+					System.out.println(ary[pos]);
+				}
+				StringBuilder builder = new StringBuilder();
+				for(String s : ary) {
+				    builder.append(s);
+				}
+				bin = builder.toString();
+				System.out.println("despues: "+ bin);
 			}
-			if(aux > 2000 || aux < -2000){
-				aux = aux%2000;
-				if(rng.nextBoolean())
-					aux = aux * -1;
-			}
-			
-			i[j] = aux;
 		}
 		return i;
 	}

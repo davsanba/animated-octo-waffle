@@ -135,7 +135,7 @@ public class PointsEx extends JFrame{
         //ElapsedTime
         //int[] result = engine.evolve(100, 3, new TargetFitness(1000, false));
         //Stagnation 
-        int[] result = engine.evolve(100, 4, new GenerationCount(1000000));
+        int[] result = engine.evolve(100, 4, new GenerationCount(100));
 		for(int i = 0; i<6;i++){
 			System.out.println("Resultado -->"+result[i]);
 		}
