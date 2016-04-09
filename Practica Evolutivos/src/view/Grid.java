@@ -21,6 +21,7 @@ public class Grid extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+    	this.setBackground(Color.white);
         super.paintComponent(g);
         for (PuntoColor fillCell : fillCells) {
             int cellX = 10 + (fillCell.getX() * 40);

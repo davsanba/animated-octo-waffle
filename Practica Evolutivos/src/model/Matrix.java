@@ -79,11 +79,11 @@ public class Matrix {
 		return abr;
 	}
 	
-	public int getEspacioLibre() {
+	public Integer getEspacioLibre() {
 		return espacioLibre;
 	}
 
-	public int getFichasPuestas() {
+	public Integer getFichasPuestas() {
 		return fichasPuestas;
 	}
 

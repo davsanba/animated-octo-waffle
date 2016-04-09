@@ -13,7 +13,7 @@ import org.uncommons.watchmaker.framework.operators.AbstractCrossover;
 
 import model.PuntoColor;
 
-public class ListCrossoverN extends AbstractCrossover<List<PuntoColor>> {
+public class ListCrossoverN<PuntoColor> extends AbstractCrossover<List<PuntoColor>> {
 
 	 public ListCrossoverN()
 	    {
@@ -44,48 +44,35 @@ public class ListCrossoverN extends AbstractCrossover<List<PuntoColor>> {
 	        super(crossoverPointsVariable, crossoverProbabilityVariable);
 	    }
 
-
-
 	@Override
-	protected List<List<PuntoColor>> mate(List<PuntoColor> parent1, 
-										  List<PuntoColor> parent2,
-										  int numberOfCrossoverPoints, 
-										  Random rng) {
-		
-		List<PuntoColor> hijo1 = new ArrayList<PuntoColor>();
-		List<PuntoColor> hijo2 = new ArrayList<PuntoColor>();
-		String p1 = "";
-		String p2 = "";
-		
-		if (parent1.size() != parent2.size())
-            throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
-		
-		
-		while(parent1.size() != 0){
-			PuntoColor a = parent1.remove(0);
-			PuntoColor b = parent2.remove(0);
-			if(!p1.contains(a.getColor().toString())){
-				hijo1.add(a);
-				p1 = p1 + a.getColor().toString();
+	protected List<List<PuntoColor>> mate(List<PuntoColor> parent1, List<PuntoColor> parent2,
+			int numberOfCrossoverPoints, Random rng) {
+		List<PuntoColor> p1 = new ArrayList<PuntoColor>(parent1); // Use a random-access list for performance.
+        List<PuntoColor> p2 = new ArrayList<PuntoColor>(parent2);
+        List<PuntoColor> offspring1 = new ArrayList<PuntoColor>(); // Use a random-access list for performance.
+        List<PuntoColor> offspring2 = new ArrayList<PuntoColor>();
+        int tamaño = p1.size();
+        for (int i = 0; i < tamaño; i++)
+        {
+        	PuntoColor a = p1.remove(0);
+        	PuntoColor b = p2.remove(0);
+        	if(offspring1.contains(a)){
+				offspring2.add(a);
 			}
 			else{
-				hijo2.add(a);
-				p2 = p2+ a.getColor().toString();
+				offspring1.add(a);
 			}
-			if(!p1.contains(b.getColor().toString())){
-				hijo1.add(b);
-				p1 = p1 + b.getColor().toString();
+			if(offspring1.contains(b)){
+				offspring2.add(b);
 			}
 			else{
-				hijo2.add(b);
-				p2 = p2+ b.getColor().toString();
+				offspring1.add(b);
 			}
-			
-		}
-		List<List<PuntoColor>> rt = new ArrayList<List<PuntoColor>>();
-		rt.add(hijo1);
-		rt.add(hijo2);
-		return rt;
+        }
+        List<List<PuntoColor>> result = new ArrayList<List<PuntoColor>>(2);
+        result.add(offspring1);
+        result.add(offspring2);
+        return result;
 	}
 	
 }

@@ -28,8 +28,9 @@ public class Menu extends JPanel  {
 	private JTextField numGen;
 	private JTextField tFitness;
 	private JTextField elitismo;
-	private JCheckBox proceso;
 	private JTextField textProb;
+	private JTextField txtDesperdicio;
+	private JTextField txtFichas;
 	
 	/**
 	 * Create the panel.
@@ -124,11 +125,6 @@ public class Menu extends JPanel  {
 		elitismo.setBounds(140, 265, 50, 20);
 		add(elitismo);
 		
-		proceso = new JCheckBox("Mostrar proceso");
-		proceso.setSelected(true);
-		proceso.setBounds(10, 304, 180, 23);
-		add(proceso);
-		
 		textProb = new JTextField();
 		textProb.setText("0.3");
 		textProb.setColumns(10);
@@ -138,6 +134,26 @@ public class Menu extends JPanel  {
 		JLabel lblProbabilidad = new JLabel("Probabilidad");
 		lblProbabilidad.setBounds(10, 192, 130, 14);
 		add(lblProbabilidad);
+		
+		JLabel lblNewLabel_1 = new JLabel("Desperdicio");
+		lblNewLabel_1.setBounds(10, 307, 89, 14);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Fichas");
+		lblNewLabel_2.setBounds(10, 332, 46, 14);
+		add(lblNewLabel_2);
+		
+		txtDesperdicio = new JTextField();
+		txtDesperdicio.setEditable(false);
+		txtDesperdicio.setBounds(125, 304, 65, 20);
+		add(txtDesperdicio);
+		txtDesperdicio.setColumns(10);
+		
+		txtFichas = new JTextField();
+		txtFichas.setEditable(false);
+		txtFichas.setColumns(10);
+		txtFichas.setBounds(125, 329, 65, 20);
+		add(txtFichas);
 		
 	}
 
@@ -160,11 +176,14 @@ public class Menu extends JPanel  {
 		return elitismo.getText();
 	}
 
-	public boolean getProceso() {
-		return proceso.isSelected();
-	}
-
 	public char Activo() {
 		return (char) buttonGroup.getSelection().getMnemonic();
 	}
+	
+	public void setDatos(String vacios, String fichas){
+		txtDesperdicio.setText(vacios);
+		txtFichas.setText(fichas);
+	}
+	
+	
 }

@@ -48,7 +48,7 @@ public class MainWindow  {
         grid.setBounds(200,0,420,420);
         frame.getContentPane().add(grid);
         
-        menu.setBounds(0, 0, 200, 340);
+        menu.setBounds(0, 0, 200, 364);
 		frame.getContentPane().add(menu);
 		
 		JButton iniciar = new JButton("Iniciar");
@@ -57,7 +57,7 @@ public class MainWindow  {
 				llamar();
 			}
 		});
-		iniciar.setBounds(55, 351, 90, 30);
+		iniciar.setBounds(55, 375, 90, 30);
 		frame.getContentPane().add(iniciar);
 	}
 
@@ -66,17 +66,17 @@ public class MainWindow  {
 		int pobInicial = Integer.parseInt(menu.getPoblacionInicial());
 		char modo = menu.Activo();
 		int elitismo = Integer.parseInt(menu.getElitismo());
-		boolean mostrar = menu.getProceso();
 		double prob = Double.parseDouble(menu.getProb());
 		if(modo == '1'){
 			dato = Integer.parseInt(menu.getNumGen());
 		}else{
 			dato = Integer.parseInt(menu.gettFitness());
 		}
-		App.getInstance().evolve(pobInicial,modo,dato,elitismo, mostrar, prob);
+		App.getInstance().evolve(pobInicial,modo,dato,elitismo, prob);
 	}
 
-	public void draw(List<PuntoColor> list) {
+	public void draw(List<PuntoColor> list, String vacios, String fichas) {
+		menu.setDatos(vacios, fichas);
 		grid.fillCell(list);
 	}
 }

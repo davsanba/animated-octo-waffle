@@ -37,7 +37,7 @@ public class Surface {
 	}
 	
 	
-	public void evolve(int pobInicial, char modo, int dato, int elitismo, boolean mostrar, double prob){
+	public void evolve(int pobInicial, char modo, int dato, int elitismo, double prob){
 		
 		List<PuntoColor> result;
 		
@@ -45,9 +45,9 @@ public class Surface {
 		
 		List<EvolutionaryOperator<List<PuntoColor>>> operators = new LinkedList<EvolutionaryOperator<List<PuntoColor>>>();
         
-        operators.add(new ListCrossoverN());
-        operators.add(new SwapMutation(prob));
-        operators.add(new TurnMutation(prob));                                                  
+        operators.add(new ListCrossoverN<>());
+        operators.add(new SwapMutation(new Probability(prob)));
+        operators.add(new TurnMutation(new Probability(prob)));                                                  
         
         EvolutionaryOperator<List<PuntoColor>> pipeline = new EvolutionPipeline<>(operators);
 		
@@ -55,22 +55,20 @@ public class Surface {
 		 EvolutionEngine<List<PuntoColor>> engine = new GenerationalEvolutionEngine<>(
 	     	       /*candidateFactory*/ factory,
 	     	       /*evolutionaryOperator*/ pipeline,
-	     	       /*fitnessEvaluator*/ new MatrixEvaluator(mostrar),
+	     	       /*fitnessEvaluator*/ new MatrixEvaluator(),
 	     	       /*selectionStrategy*/ new RouletteWheelSelection(),
 	     	       /*rng*/ new MersenneTwisterRNG()
 	     	 );
 		if(modo == '1'){
 			//Stagnation 
 			result = engine.evolve(pobInicial, elitismo, new GenerationCount(dato));
-	        System.out.println("mostrando " + result.size());
-	        Matrix rst = new Matrix(result);
-	        App.getInstance().draw(rst.drawMatrix());
-			
+
 		}else{
 			//ElapsedTime
 	        result = engine.evolve(pobInicial, elitismo, new TargetFitness(dato, false));
-	        App.getInstance().draw(result);
 		}
+		Matrix rst = new Matrix(result);
+        App.getInstance().draw(rst.drawMatrix(),rst.getEspacioLibre().toString(),rst.getFichasPuestas().toString());
 		
         
 	}
