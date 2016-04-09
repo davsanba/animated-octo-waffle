@@ -33,9 +33,9 @@ public class Matrix {
 			boolean puesta = false;
 			int ancho = ficha.getX();
 			int alto = ficha.getY();
-			while(pos.y <= 10 && pos.y + alto < 10 && !puesta){
+			while(pos.y <= 10 && pos.y + alto <= 10 && !puesta){
 					while(pos.x <= 10 ){
-						if( pos.x + ancho <= 10 && matrix[pos.y][pos.x] == 'x' ){
+						if( pos.x + ancho <= 10 && matrix[pos.x][pos.y] == 'x' ){
 							char[][] cond = tryAndFill(ficha, pos);
 							if(cond != null){
 								matrix = cond;
@@ -61,17 +61,17 @@ public class Matrix {
 		int ancho = ficha.getX(), alto = ficha.getY();
 		char[][] abr = matrix.clone();
 		boolean falla = false;
-		for(int i = 0; i < alto; i++){
-			for(int j = 0; j< ancho; j++){
-				if (abr[i+pos.y][j+pos.x] != 'x'){
+		for(int i = 0; i < ancho; i++){
+			for(int j = 0; j< alto; j++){
+				if (abr[i+pos.x][j+pos.y] != 'x'){
 					falla = true;
 				}
 			}
 		}
 		if(!falla){
-			for(int i = 0; i < alto; i++){
-				for(int j = 0; j< ancho; j++){
-					abr[i+pos.y][j+pos.x] = ficha.toChar();
+			for(int i = 0; i < ancho; i++){
+				for(int j = 0; j< alto; j++){
+					abr[i+pos.x][j+pos.y] = ficha.toChar();
 				}
 			}
 		}

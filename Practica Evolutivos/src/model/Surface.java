@@ -45,7 +45,7 @@ public class Surface {
 		
 		List<EvolutionaryOperator<List<PuntoColor>>> operators = new LinkedList<EvolutionaryOperator<List<PuntoColor>>>();
         
-        operators.add(new ListCrossoverN<>());
+        operators.add(new ListCrossoverN<>(1,new Probability(prob)));
         operators.add(new SwapMutation(new Probability(prob)));
         operators.add(new TurnMutation(new Probability(prob)));                                                  
         
@@ -67,6 +67,10 @@ public class Surface {
 			//ElapsedTime
 	        result = engine.evolve(pobInicial, elitismo, new TargetFitness(dato, false));
 		}
+		for(PuntoColor p: result){
+			System.out.print(p.toChar()+ "(" + p.getX() + " , " + p.getY() +  ")" +  " ");
+		}
+		System.out.println("");
 		Matrix rst = new Matrix(result);
         App.getInstance().draw(rst.drawMatrix(),rst.getEspacioLibre().toString(),rst.getFichasPuestas().toString());
 		
